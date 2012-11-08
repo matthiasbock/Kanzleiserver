@@ -1,10 +1,14 @@
+#!/usr/bin/python
+
 import bobo
+from smartcard_ui import *
 
 @bobo.query('/')
 def index():
-	return bobo.redirect('/jquery.py')
-
-@bobo.query('/jquery.py')
-def smartcard():
-	reader = 'Fujitsu Siemens Computers SmartCard USB 2A 00 00'
-	return open('jquery.html').read() % (reader)
+	if smartcard_is_present():
+		if smartcard_is_locked():
+			return enter_pin()
+		else:
+			return smartcard_menu()
+	else:
+		return no_smartcard_present()
