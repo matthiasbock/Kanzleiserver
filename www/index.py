@@ -12,3 +12,7 @@ def index():
 			return smartcard_menu()
 	else:
 		return no_smartcard_present()
+
+@bobo.query('/wait.gif')
+def waitgif():
+	return open('wait.gif').read()
