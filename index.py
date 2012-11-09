@@ -13,6 +13,11 @@ def index():
 	else:
 		return no_smartcard_present()
 
-@bobo.query('/wait.gif')
-def waitgif():
-	return open('wait.gif').read()
+@bobo.query('/favicon.ico')
+def favicon():
+	return bobo.redirect('/img/favicon.ico')
+
+@bobo.query('/img/:filename')
+def waitgif(filename='wait.gif'):
+	return open('img/'+filename).read()
+

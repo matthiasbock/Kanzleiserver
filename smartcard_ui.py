@@ -11,8 +11,8 @@ def no_smartcard_present():
 
 def enter_pin():
 	reader = 'Fujitsu Siemens Computers SmartCard USB 2A 00 00'
-	return open('enter_pin.html').read() % (reader, 'Test')
+	return open('smartcard_enter_pin.html').read() % (reader, 'Test')
 
 def smartcard_menu():
 	reader = 'Fujitsu Siemens Computers SmartCard USB 2A 00 00'
-	return open('jquery.html').read() % (reader)
+	return open('smartcard_menu.html').read() % (reader)
