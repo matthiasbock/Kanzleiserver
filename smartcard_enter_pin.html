@@ -1,45 +1,77 @@
-<!doctype html>
- 
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="utf-8" />
-    <title>jQuery UI Tabs - Default functionality</title>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
-    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="css/style.css" />
-    <script>
-    $(function() {
-        $( "button" )
-            .button()
-            .click(function( event ) {
-                event.preventDefault();
-            });
-    });
-     $(function() {
-        $( "#dialog" ).dialog({
-		width: '250px',
-		resizable: false
-		});
+	<meta charset="utf-8" />
+	<title>Kanzleiserver - PIN eingeben</title>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+<!--script src="http://jqueryui.com/resources/demos/external/jquery.bgiframe-2.1.2.js"></script-->
+<link rel="stylesheet" href="css/jquery.css" />
+	<script>
+	$(function() {
+	$( "button" )
+	    .button()
+	    .click(function( event ) {
+		event.preventDefault();
+	    });
 	});
-    $(function() {
-	$("#btnOK").click(function() {
-		$("#dialog").effect('shake');
-		});
-	});
-    </script>
+	function showPINdialog() {
+		$(function() {
+			$( "#dialog" ).dialog({
+					width: '200px',
+					resizable: false,
+			    modal: true,
+			    position: "center",
+			    buttons: {
+				"C": function() {
+					document.getElementById('PIN').value = "";
+					$( this ).animate({backgroundColor: 'white'}, 'slow');
+				},
+				"OK": function() {
+					$( this ).effect('shake').animate({backgroundColor: 'red'}, 'slow');
+					$("#warning").show();
+				},
+				"X": function() {
+				    $( this ).dialog( "close" );
+				}
+			    }
+			});
+		    });
+		}
+	showPINdialog();
+	</script>
 </head>
+
 <body>
- 
  <center>
  <br/>
- <h1>%s</h1>
- Karte vorhanden: %s
  <br/>
- Karte gesperrt
+ <h1>Smartcard vorhanden</h1>
+ <table border=0 cellpadding="3px">
+	<tr>
+		<td>Leser:</td>
+		<td>%s</td>
+	</tr>
+	<tr>
+		<td>Karte:</td>
+		<td>%s</td>
+	</tr>
+	<tr>
+		<td>Status:</td>
+		<td><i>Karte gesperrt</i></td>
+	</tr>
+</table>
+<br/>
+<br/>
+<button onClick="showPINdialog();" >Fortfahren mit PIN-Eingabe ...</button>
+ 
  
 <div id="dialog" title="PIN eingeben">
 	<center>
+	<input id=PIN />
+	<br/>
+	<br/>
 	<button>1</button>
 	<button>2</button>
 	<button>3</button>
@@ -53,13 +85,9 @@
 	<button>9</button>
 	<br/>
 	<button>0</button>
-	<br/><br/>
-	<button id='btnC'>C</button>
-	<button id='btnOK'>OK</button>
-	<button>X</button>
 	<br/>
-	<img src='img/wait.gif'/>
+	<b>Nach 3 falschen Eingaben wird die Karte gesperrt</b>
 </div>
-
 </body>
+
 </html>

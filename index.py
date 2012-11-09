@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import bobo
-from smartcard_ui import *
+from smartcard import *
 
 @bobo.query('/')
 def index():
@@ -11,13 +11,16 @@ def index():
 		else:
 			return smartcard_menu()
 	else:
-		return no_smartcard_present()
+		return smartcard_not_present()
 
 @bobo.query('/favicon.ico')
 def favicon():
 	return bobo.redirect('/img/favicon.ico')
 
 @bobo.query('/img/:filename')
-def waitgif(filename='wait.gif'):
+def img(filename='wait.gif'):
 	return open('img/'+filename).read()
 
+@bobo.query('/css/:filename')
+def css(filename='jquery.css'):
+	return open('css/'+filename).read()
