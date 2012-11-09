@@ -2,12 +2,12 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>Kanzleiserver - PIN eingeben</title>
+	<title>PIN eingeben</title>
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
 	<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
 	<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-<!--script src="http://jqueryui.com/resources/demos/external/jquery.bgiframe-2.1.2.js"></script-->
-<link rel="stylesheet" href="css/jquery.css" />
+	<link rel="stylesheet" href="css/jquery.css" />
+
 	<script>
 	$(function() {
 	$( "button" )
@@ -15,6 +15,13 @@
 	    .click(function( event ) {
 		event.preventDefault();
 	    });
+	});
+	$(function() {
+	$( "#info-dialog" ).dialog({
+		width: "600px",
+		resizable: false,
+		modal: true,
+		});
 	});
 	function showPINdialog() {
 		$(function() {
@@ -45,27 +52,26 @@
 
 <body>
  <center>
- <br/>
- <br/>
- <h1>Smartcard vorhanden</h1>
- <table border=0 cellpadding="3px">
-	<tr>
-		<td>Leser:</td>
-		<td>%s</td>
-	</tr>
-	<tr>
-		<td>Karte:</td>
-		<td>%s</td>
-	</tr>
-	<tr>
-		<td>Status:</td>
-		<td><i>Karte gesperrt</i></td>
-	</tr>
-</table>
-<br/>
-<br/>
-<button onClick="showPINdialog();" >Fortfahren mit PIN-Eingabe ...</button>
  
+ <div id="info-dialog" title="Smartcard vorhanden">
+	 <table border=0 cellpadding="3px">
+		<tr>
+			<td>Leser:</td>
+			<td>%s</td>
+		</tr>
+		<tr>
+			<td>Karte:</td>
+			<td>%s</td>
+		</tr>
+		<tr>
+			<td>Status:</td>
+			<td><i>Karte gesperrt</i></td>
+		</tr>
+	</table>
+	<br/>
+	<br/>
+	<button onClick="showPINdialog();" >Fortfahren mit PIN-Eingabe ...</button>
+	 </div>
  
 <div id="dialog" title="PIN eingeben">
 	<center>

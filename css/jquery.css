@@ -6,4 +6,7 @@ body {
 .ui-dialog-buttonpane	{
 									text-align: center;
 									}
-  
+
+table {
+	font-size: 90%;
+	}

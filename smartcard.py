@@ -6,10 +6,11 @@ def smartcard_is_present():
 	return True
 
 def smartcard_not_present():
-	return open('smartcard_not_present.html').read % (getReaderName())
+	reader = getReaderName()
+	return open('smartcard_not_present.html').read() % (reader)
 
 def smartcard_is_locked():
-	return True
+	return False
 
 def enter_pin():
 	return open('smartcard_enter_pin.html').read() % (getReaderName(), getSmartcardName())

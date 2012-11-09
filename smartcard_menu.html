@@ -8,6 +8,7 @@
     <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="css/jquery.css" />
     <script>
+    // tabs to the left!
     $(function() {
         $( "#tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
         $( "#tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
@@ -27,13 +28,12 @@
  <center>
  <br/>
  <br/>
- <h1>Smartcard-Men&uuml;</h1>
- Leser: %s<br/>
- Karte: %s<br/>
- Status: <b>Karte entsperrt</b>
- <button>Abmelden</button><br/>
- Automatische Abmeldung in 10:00 min
- 
+
+Automatische Abmeldung in 10:00 min
+<button>Nicht abmelden</button>
+<button>Abmelden</button>
+<br/>
+
 <div id="tabs">
     <ul>
         <li><a href="#tabs-1">Smartcard</a></li>
@@ -41,15 +41,38 @@
         <li><a href="#tabs-3">Signieren</a></li>
         <li><a href="#tabs-4">Schl&uuml;sselbund</a></li>
     </ul>
-    <div id="tabs-1">
-        <h2>Content heading 1</h2>
-    </div>
-    <div id="tabs-2">
-        <h2>Content heading 2</h2>
-    </div>
-    <div id="tabs-3">
-        <h2>Content heading 3</h2>
-    </div>
+	<div id="tabs-1">
+		<h2>Smartcard</h2>
+		 <table border=0 cellpadding="3px">
+			<tr>
+				<td>Leser:</td>
+				<td>%s</td>
+			</tr>
+			<tr>
+				<td>Karte:</td>
+				<td>%s</td>
+			</tr>
+			<tr>
+				<td>Status:</td>
+				<td><i>Karte entsperrt</i></td>
+			</tr>
+		</table>
+	</div>
+	<div id="tabs-2">
+		<h2>Verschl&uuml;sseln</h2>
+		<hr/>
+		<h2>Entschl&uuml;sseln</h2>
+	</div>
+	<div id="tabs-3">
+		<h2>Dokument signieren</h2>
+		<hr/>
+		<h2>Dokumentensignatur pr&uuml;fen</h2>
+	</div>
+	<div id="tabs-4">
+		<h2>Sch&uuml;ssel auf der Smartcard</h2>
+		<hr/>
+		<h2>Sch&uuml;ssel auf dem Kanzleiserver</h2>
+	</div>
 </div>
 </body>
 
