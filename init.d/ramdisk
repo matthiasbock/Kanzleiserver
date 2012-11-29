@@ -1,0 +1,28 @@
+#!/bin/sh
+# /etc/rc.serial 
+# Creates a RAM disk for fast file access
+# and mounts it on /tmp and /var/cache/apt/archives
+
+### BEGIN INIT INFO ###
+# Provides:			ramdisk
+# Required-Start:
+# Required-Stop:
+# Default-Start:		S
+# Default-Stop:			0 1 6
+# Short-Description:		creates a RAM disk
+# Description:          	creates a RAM disk for fast file access and mounts it on /tmp
+### END INIT INFO ###
+
+#
+# Handle System V init conventions...
+#
+
+case $1 in
+start | restart | force-reload )
+	mkfs -q /dev/ram1 8192
+        mount /dev/ram1 /tmp
+	mkdir -p /tmp/archives
+        ;;
+stop)
+        # nothing
+        ;;
