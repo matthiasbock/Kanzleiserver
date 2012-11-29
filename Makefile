@@ -31,6 +31,7 @@ MediaWiki:
 		cd www/; \
 		wget http://download.wikimedia.org/mediawiki/1.20/mediawiki-1.20.0.tar.gz -O /tmp/mediawiki.tar.gz; \
 		tar -xzf /tmp/mediawiki.tar.gz; \
+		mv mediawiki-1.20.0 MediaWiki; \
 	fi
 	cd ..
 	
@@ -40,6 +41,7 @@ ownCloud:
 		cd www/ownCloud; \
 		wget http://mirrors.owncloud.org/releases/owncloud-4.5.2.tar.bz2 -O /tmp/owncloud.tar.bz2; \
 		tar -xjf /tmp/owncloud.tar.bz2; \
+		mv owncloud ownCloud; \
 	fi
 
 WebSC:
