@@ -3,7 +3,7 @@
 #
 
 all:
-	make ramdisk OpenLawyers MediaWiki ownCloud UPnP WebSC
+	make ramdisk OpenLawyers MediaWiki ownCloud WebSC UPnP
 
 prepare:
 	mkdir -p /home/code/
@@ -12,59 +12,53 @@ prepare:
 	aptitude install tar bzip2 gzip git --yes
 
 ramdisk:
-	cp init.d/ramdisk /etc/init.d/
-	ln ../init.d/ramdisk /etc/rcS.d/S11ramdisk -fs
+	if [ ! -e /etc/init.d/ramdisk ]; then		cp init.d/ramdisk /etc/init.d/;				fi
+	if [ ! -e /etc/rcS.d/S11ramdisk ]; then	ln ../init.d/ramdisk /etc/rcS.d/S11ramdisk -fs;	fi
 
 OpenLawyers:
 	# install OpenLawyers
-	if [ -e "OpenLawyers" ]; then \
+	if [ -e "www/OpenLawyers" ]; then \
 		cd www/OpenLawyers/; \
 		git pull; \
 	else \
 		cd www/; \
 		git clone https://github.com/matthiasbock/OpenLawyers.git; \
 	fi
-	cd ..
 
 MediaWiki:
 	# install MediaWiki 1.20.0
-	cd www/
-	if [ ! -e mediawiki ]; then
-		wget http://download.wikimedia.org/mediawiki/1.20/mediawiki-1.20.0.tar.gz -O /tmp/mediawiki.tar.gz
-		tar -xzf /tmp/mediawiki.tar.gz
-#		rm /tmp/mediawiki.tar.gz
+	if [ ! -e "www/MediaWiki" ]; then \
+		cd www/; \
+		wget http://download.wikimedia.org/mediawiki/1.20/mediawiki-1.20.0.tar.gz -O /tmp/mediawiki.tar.gz; \
+		tar -xzf /tmp/mediawiki.tar.gz; \
 	fi
 	cd ..
 	
 ownCloud:
 	# install ownCloud 4.5.2
-	cd www/
-	if [ ! -e owncloud ]; then
-		wget http://mirrors.owncloud.org/releases/owncloud-4.5.2.tar.bz2 -O /tmp/owncloud.tar.bz2
-		tar -xjf /tmp/owncloud.tar.bz2
-#		rm /tmp/owncloud.tar.bz2
+	if [ ! -e "www/ownCloud" ]; then \
+		cd www/ownCloud; \
+		wget http://mirrors.owncloud.org/releases/owncloud-4.5.2.tar.bz2 -O /tmp/owncloud.tar.bz2; \
+		tar -xjf /tmp/owncloud.tar.bz2; \
 	fi
-	cd ..
-
-UPnP:
-	# install UPnP-Buddy
-	mkdir tools -p
-	cd tools/
-	if [ -e "UPnP-Buddy" ]; then
-		cd UPnP-Buddy
-		git pull
-	else
-		git clone https://github.com/matthiasbock/UPnP-Buddy.git
-	fi
-	cd ..
 
 WebSC:
 	# install WebSC
-	cd www/
-	if [ -e "WebSC" ]; then
-		cd WebSC
-		git pull
-	else
-		git clone https://github.com/matthiasbock/WebSC.git
+	if [ -e "www/WebSC" ]; then \
+		cd www/WebSC; \
+		git pull; \
+	else \
+		cd www/; \
+		git clone https://github.com/matthiasbock/WebSC.git; \
 	fi
-	cd ..
+
+UPnP:
+	# install UPnP-Buddy
+	if [ -e "tools/UPnP-Buddy" ]; then \
+		cd tools/UPnP-Buddy; \
+		git pull; \
+	else \
+		mkdir tools -p; \
+		cd tools/; \
+		git clone https://github.com/matthiasbock/UPnP-Buddy.git; \
+	fi
