@@ -3,25 +3,26 @@
 #
 
 all:
-	mkdir -p /home/code/
-	cd ..
-	mv Kanzleiserver /home/code/
-	cd /home/code/Kanzleiserver
-	aptitude install tar bzip2 gzip git -y
 	make ramdisk OpenLawyers MediaWiki ownCloud UPnP WebSC
+
+prepare:
+	mkdir -p /home/code/
+	cd ..;	mv Kanzleiserver /home/code/
+	cd /home/code/Kanzleiserver
+	aptitude install tar bzip2 gzip git --yes
 
 ramdisk:
 	cp init.d/ramdisk /etc/init.d/
-	ln ../init.d/ramdisk /etc/rcS.d/S11ramdisk -s
+	ln ../init.d/ramdisk /etc/rcS.d/S11ramdisk -fs
 
 OpenLawyers:
 	# install OpenLawyers
-	cd www/
-	if [ -e "OpenLawyers" ]; then
-		cd OpenLawyers
-		git pull
-	else
-		git clone https://github.com/matthiasbock/OpenLawyers.git
+	if [ -e "OpenLawyers" ]; then \
+		cd www/OpenLawyers/; \
+		git pull; \
+	else \
+		cd www/; \
+		git clone https://github.com/matthiasbock/OpenLawyers.git; \
 	fi
 	cd ..
 
