@@ -8,40 +8,62 @@ all:
 	mv Kanzleiserver /home/code/
 	cd /home/code/Kanzleiserver
 	aptitude install tar bzip2 gzip git -y
-	make ramdisk openLawyers MediaWiki ownCloud UPnP WebSC
+	make ramdisk OpenLawyers MediaWiki ownCloud UPnP WebSC
 
 ramdisk:
 	cp init.d/ramdisk /etc/init.d/
 	ln ../init.d/ramdisk /etc/rcS.d/S11ramdisk -s
 
-openLawyers:
-	# install openLawyers
+OpenLawyers:
+	# install OpenLawyers
+	cd www/
+	if [ -e "OpenLawyers" ]; then
+		cd OpenLawyers
+		git pull
+	else
+		git clone https://github.com/matthiasbock/OpenLawyers.git
+	fi
+	cd ..
 
 MediaWiki:
 	# install MediaWiki 1.20.0
-	wget http://download.wikimedia.org/mediawiki/1.20/mediawiki-1.20.0.tar.gz -O /tmp/mediawiki.tar.gz
 	cd www/
-	tar -xzf /tmp/mediawiki.tar.gz
-	rm /tmp/mediawiki.tar.gz
+	if [ ! -e mediawiki ]; then
+		wget http://download.wikimedia.org/mediawiki/1.20/mediawiki-1.20.0.tar.gz -O /tmp/mediawiki.tar.gz
+		tar -xzf /tmp/mediawiki.tar.gz
+#		rm /tmp/mediawiki.tar.gz
+	fi
 	cd ..
 	
 ownCloud:
 	# install ownCloud 4.5.2
-	wget http://mirrors.owncloud.org/releases/owncloud-4.5.2.tar.bz2 -O /tmp/owncloud.tar.bz2
 	cd www/
-	tar -xjf /tmp/owncloud.tar.bz2
-	rm /tmp/owncloud.tar.bz2
+	if [ ! -e owncloud ]; then
+		wget http://mirrors.owncloud.org/releases/owncloud-4.5.2.tar.bz2 -O /tmp/owncloud.tar.bz2
+		tar -xjf /tmp/owncloud.tar.bz2
+#		rm /tmp/owncloud.tar.bz2
+	fi
 	cd ..
 
 UPnP:
 	# install UPnP-Buddy
 	mkdir tools -p
 	cd tools/
-	git clone https://github.com/matthiasbock/UPnP-Buddy.git
+	if [ -e "UPnP-Buddy" ]; then
+		cd UPnP-Buddy
+		git pull
+	else
+		git clone https://github.com/matthiasbock/UPnP-Buddy.git
+	fi
 	cd ..
 
 WebSC:
 	# install WebSC
 	cd www/
-	git clone https://github.com/matthiasbock/WebSC.git
+	if [ -e "WebSC" ]; then
+		cd WebSC
+		git pull
+	else
+		git clone https://github.com/matthiasbock/WebSC.git
+	fi
 	cd ..
