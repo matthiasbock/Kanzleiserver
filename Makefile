@@ -51,7 +51,7 @@ MediaWiki:
 ownCloud:
 	# install ownCloud 4.5.2
 	if [ ! -e "www/ownCloud" ]; then \
-		cd www/ownCloud; \
+		cd www/; \
 		wget -c http://mirrors.owncloud.org/releases/owncloud-4.5.2.tar.bz2 -O /tmp/owncloud.tar.bz2; \
 		tar -xjf /tmp/owncloud.tar.bz2; \
 		mv owncloud ownCloud; \
