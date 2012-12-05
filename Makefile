@@ -16,10 +16,14 @@ ramdisk:
 	if [ ! -e /etc/rcS.d/S11ramdisk ]; then	ln ../init.d/ramdisk /etc/rcS.d/S11ramdisk -fs;	fi
 
 WebAppDesktop:
-	cd www/; \
-	git clone https://github.com/matthiasbock/WebApp-Desktop.git; \
-	mv WebApp-Desktop/* .; \
-	rm WebApp-Desktop/ -R
+	if [ -e "www/WebApp-Desktop" ]; then \
+		cd www/WebApp-Desktop/; \
+		git pull; \
+	else \
+		cd www/; \
+		git clone https://github.com/matthiasbock/WebApp-Desktop.git; \
+		ln WebApp-Desktop/index.html . -s; \
+	fi
 
 OpenLawyers:
 	# install OpenLawyers
