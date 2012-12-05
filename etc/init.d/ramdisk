@@ -21,7 +21,7 @@ case $1 in
 start | restart | force-reload )
 	mkfs -q /dev/ram1 8192
         mount /dev/ram1 /tmp
-	mkdir -p /tmp/archives
+	mkdir -p /tmp/archives/partial
         ;;
 stop)
         # nothing

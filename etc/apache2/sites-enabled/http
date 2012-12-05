@@ -1,0 +1,13 @@
+Listen 80
+NameVirtualHost *:80
+
+<VirtualHost *:80>
+        DocumentRoot            /var/www/http
+
+        <Location "/">
+                RewriteEngine           On
+                RewriteRule             ^/(.*)$         https://$0/$1
+                Options                 +FollowSymlinks
+        </Location>
+
+</VirtualHost>
