@@ -3,13 +3,16 @@
 #
 
 all:
-	make ramdisk WebAppDekstop OpenLawyers MediaWiki ownCloud WebSC UPnP
+	make prepare install
 
 prepare:
 	mkdir -p /home/code/
 	cd ..;	mv Kanzleiserver /home/code/
 	cd /home/code/Kanzleiserver
 	aptitude install tar bzip2 gzip git --yes
+
+install:
+	make ramdisk WebAppDesktop OpenLawyers MediaWiki ownCloud WebSC UPnP
 
 ramdisk:
 	if [ ! -e /etc/init.d/ramdisk ]; then		cp init.d/ramdisk /etc/init.d/;				fi
@@ -39,7 +42,7 @@ MediaWiki:
 	# install MediaWiki 1.20.0
 	if [ ! -e "www/MediaWiki" ]; then \
 		cd www/; \
-		wget http://download.wikimedia.org/mediawiki/1.20/mediawiki-1.20.0.tar.gz -O /tmp/mediawiki.tar.gz; \
+		wget -c http://download.wikimedia.org/mediawiki/1.20/mediawiki-1.20.0.tar.gz -O /tmp/mediawiki.tar.gz; \
 		tar -xzf /tmp/mediawiki.tar.gz; \
 		mv mediawiki-1.20.0 MediaWiki; \
 	fi
@@ -49,7 +52,7 @@ ownCloud:
 	# install ownCloud 4.5.2
 	if [ ! -e "www/ownCloud" ]; then \
 		cd www/ownCloud; \
-		wget http://mirrors.owncloud.org/releases/owncloud-4.5.2.tar.bz2 -O /tmp/owncloud.tar.bz2; \
+		wget -c http://mirrors.owncloud.org/releases/owncloud-4.5.2.tar.bz2 -O /tmp/owncloud.tar.bz2; \
 		tar -xjf /tmp/owncloud.tar.bz2; \
 		mv owncloud ownCloud; \
 	fi
