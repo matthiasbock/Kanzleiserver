@@ -15,7 +15,7 @@ install:
 	make ramdisk WebAppDesktop OpenLawyers MediaWiki ownCloud WebSC UPnP
 
 ramdisk:
-	if [ ! -e /etc/init.d/ramdisk ]; then		cp init.d/ramdisk /etc/init.d/;				fi
+	if [ ! -e /etc/init.d/ramdisk ]; then		cp etc/init.d/ramdisk /etc/init.d/;				fi
 	if [ ! -e /etc/rcS.d/S11ramdisk ]; then	ln ../init.d/ramdisk /etc/rcS.d/S11ramdisk -fs;	fi
 
 WebAppDesktop:
