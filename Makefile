@@ -3,7 +3,7 @@
 #
 
 all:
-	make ramdisk OpenLawyers MediaWiki ownCloud WebSC UPnP
+	make ramdisk WebAppDekstop OpenLawyers MediaWiki ownCloud WebSC UPnP
 
 prepare:
 	mkdir -p /home/code/
@@ -14,6 +14,12 @@ prepare:
 ramdisk:
 	if [ ! -e /etc/init.d/ramdisk ]; then		cp init.d/ramdisk /etc/init.d/;				fi
 	if [ ! -e /etc/rcS.d/S11ramdisk ]; then	ln ../init.d/ramdisk /etc/rcS.d/S11ramdisk -fs;	fi
+
+WebAppDesktop:
+	cd www/; \
+	git clone https://github.com/matthiasbock/WebApp-Desktop.git; \
+	mv WebApp-Desktop/* .; \
+	rm WebApp-Desktop/ -R
 
 OpenLawyers:
 	# install OpenLawyers
@@ -64,3 +70,4 @@ UPnP:
 		cd tools/; \
 		git clone https://github.com/matthiasbock/UPnP-Buddy.git; \
 	fi
+
