@@ -13,6 +13,7 @@ prepare:
 
 install:
 	make ramdisk WebAppDesktop OpenLawyers MediaWiki ownCloud WebSC UPnP
+	chown www-data:www-data www/ -R
 
 ramdisk:
 	if [ ! -e /etc/init.d/ramdisk ]; then		cp init.d/ramdisk /etc/init.d/;				fi
